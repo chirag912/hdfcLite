@@ -5,13 +5,16 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 import "./styles.css";
 tf.setBackend('webgl');
 
-const threshold = 0.75;
+const threshold = 0.60;
+const link_threshold = 0.80;
 
 async function load_model() {
     // It's possible to load the model locally or from a repo
     // You can choose whatever IP and PORT you want in the "http://127.0.0.1:8080/model.json" just set it before in your https server
     //const model = await loadGraphModel("http://127.0.0.1:8080/model.json");
+    //const model = await loadGraphModel("https://raw.githubusercontent.com/hugozanini/TFJS-object-detection/sku/models/sku80/model.json");
     const model = await loadGraphModel("https://raw.githubusercontent.com/chirag912/hdfcLite/main/models/web_model/model.json");
+    console.log(model.outputNodes);
     return model;
   }
 
@@ -100,6 +103,11 @@ class App extends React.Component {
           score: score.toFixed(4),
           bbox: bbox
         })
+        if (score > link_threshold) {
+         
+          window.open("https://dataseedtech.com/contact")
+
+        }
       }
     })
     return detectionObjects
@@ -115,9 +123,12 @@ class App extends React.Component {
     ctx.textBaseline = "top";
 
     //Getting predictions
-    const boxes = predictions[4].arraySync();
-    const scores = predictions[5].arraySync();
-    const classes = predictions[6].dataSync();
+    const boxes = predictions[6].arraySync(); //predictions[6].arraySync(); //detection boxes
+    console.log(boxes[0]);
+    const scores = predictions[7].arraySync(); //predictions[7].arraySync();//Identity 4
+    console.log(scores[0]);
+    const classes = predictions[2].dataSync(); //predictions[2].dataSync(); // Identity 2
+    // console.log(boxes, scores, classes);
     const detections = this.buildDetectedObjects(scores, threshold,
                                     boxes, classes, classesDir);
 
@@ -152,8 +163,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Real-Time Object Detection: HDFC</h1>
-        <h3>By:Dataseed Tech</h3>
+        <h1>Real-Time Logo Detection</h1>
+        <h3>Powered By: Dataseed Tech</h3>
+        <h4>Please wait for few seconds for the weights to load.</h4>
         <video
           style={{height: '600px', width: "500px"}}
           className="size"
