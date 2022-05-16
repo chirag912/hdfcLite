@@ -13,7 +13,7 @@ async function load_model() {
     // You can choose whatever IP and PORT you want in the "http://127.0.0.1:8080/model.json" just set it before in your https server
     //const model = await loadGraphModel("http://127.0.0.1:8080/model.json");
     //const model = await loadGraphModel("https://raw.githubusercontent.com/hugozanini/TFJS-object-detection/sku/models/sku80/model.json");
-    const model = await loadGraphModel("https://raw.githubusercontent.com/chirag912/hdfcLite/main/models/web_model/model.json");
+    const model = await loadGraphModel("https://raw.githubusercontent.com/chirag912/hdfcLite/new1/models/web_model/model.json");
     console.log(model.outputNodes);
     return model;
   }
