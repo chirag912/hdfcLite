@@ -105,7 +105,8 @@ class App extends React.Component {
         })
         if (score > link_threshold) {
          
-          window.open("https://dataseedtech.com/contact")
+          #window.open("https://dataseedtech.com/contact")
+          console.log("Detection successful")
 
         }
       }
