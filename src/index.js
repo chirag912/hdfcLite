@@ -124,9 +124,9 @@ class App extends React.Component {
     ctx.textBaseline = "top";
 
     //Getting predictions
-    const boxes = predictions[5].arraySync(); //predictions[6].arraySync(); //detection boxes
+    const boxes = predictions[4].arraySync(); //predictions[6].arraySync(); //detection boxes
     console.log(boxes[0]);
-    const scores = predictions[7].arraySync(); //predictions[7].arraySync();//Identity 4
+    const scores = predictions[6].arraySync(); //predictions[7].arraySync();//Identity 4
     console.log(scores[0]);
     const classes = predictions[1].dataSync(); //predictions[2].dataSync(); // Identity 2
     // console.log(boxes, scores, classes);
